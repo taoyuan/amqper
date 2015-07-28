@@ -32,7 +32,9 @@ describe('amqper', function () {
             done();
           });
         });
-        client.publish('amq.topic', 'test1.a', data);
+        setTimeout(function () {
+          client.publish('amq.topic', 'test1.a', data);
+        }, 500);
       });
     });
 
@@ -52,7 +54,9 @@ describe('amqper', function () {
             done();
           });
         });
-        client.publish('amq.topic', 'test2.a', data);
+        setTimeout(function () {
+          client.publish('amq.topic', 'test2.a', data);
+        }, 500);
       });
     });
   });
