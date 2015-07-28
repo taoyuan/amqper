@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var excludeGitignore = require('gulp-exclude-gitignore');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
-var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
 var nsp = require('gulp-nsp');
 var plumber = require('gulp-plumber');
@@ -19,7 +18,6 @@ gulp.task('static', function () {
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
-    .pipe(jscs())
     .on('error', handleErr);
 });
 
@@ -36,7 +34,7 @@ gulp.task('pre-test', function () {
 gulp.task('test', ['pre-test'], function (cb) {
   var mochaErr;
 
-  gulp.src('test/**/*.js')
+  gulp.src('test/**/*.test.js')
     .pipe(plumber())
     .pipe(mocha({reporter: 'spec'}))
     .on('error', function (err) {
@@ -45,6 +43,7 @@ gulp.task('test', ['pre-test'], function (cb) {
     .pipe(istanbul.writeReports())
     .on('end', function () {
       cb(mochaErr);
+      process.exit(0);
     });
 });
 

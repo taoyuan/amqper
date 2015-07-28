@@ -7,35 +7,46 @@ var amqper = require('../');
 describe('amqper', function () {
 
   describe('connect', function () {
-    this.timeout(10000);
-
     it('should connect to rabbit server', function (done) {
       var client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function (conn) {
         t.ok(conn);
-        done();
+        client.close(done);
       });
     });
   });
 
   describe('pubsub', function () {
-    this.timeout(10000);
-
     it('should publish and received in route', function (done) {
       var data = {
-        foo: 'bar'
+        foo: 'bar1'
       };
 
       var client = amqper.connect('amqp://guest:guest@localhost:5672');
-      client.$promise.then(function (conn) {
-        client.route('test.:arg', {queue: 'this_is_queue_name'}, function (message) {
+      client.$promise.then(function () {
+        client.route('test1.:arg', {queue: 'this_is_queue_name_1'}, function (message) {
           console.log(message.payload);
           t.deepEqual(message.payload, data);
-          done();
+          client.close(done);
         });
-        setTimeout(function () {
-          client.publish('amq.topic', 'test.a', data);
-        }, 500); // delay some time to publish
+        client.publish('amq.topic', 'test1.a', data);
+      });
+    });
+
+    it('should publish and received in route with msgpack format', function (done) {
+      var data = {
+        hello: 'world'
+      };
+
+      var client = amqper.connect('amqp://guest:guest@localhost:5672');
+      client.$promise.then(function () {
+        client.format('msgpack');
+        client.route('test2.:arg', {queue: 'this_is_queue_name_2'}, function (message) {
+          console.log(message.payload);
+          t.deepEqual(message.payload, data);
+          client.close(done);
+        });
+        client.publish('amq.topic', 'test2.a', data);
       });
     });
   });

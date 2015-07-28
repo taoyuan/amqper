@@ -2,7 +2,7 @@
   "node": true,
   "esnext": true,
   "bitwise": false,
-  "curly": true,
+  "curly": false,
   "eqeqeq": true,
   "eqnull": true,
   "immed": true,
@@ -11,6 +11,6 @@
   "noarg": true,
   "undef": true,
   "strict": true,
-  "quotmark": "single",
-  "scripturl": true
+  "scripturl": true,
+  "mocha": true
 }
