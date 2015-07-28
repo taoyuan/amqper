@@ -27,7 +27,10 @@ describe('amqper', function () {
         client.route('test1.:arg', {queue: 'this_is_queue_name_1'}, function (message) {
           console.log(message.payload);
           t.deepEqual(message.payload, data);
-          client.close(done);
+          client.close(function () {
+            t.lengthOf(client.svcs_container.routes, 0);
+            done();
+          });
         });
         client.publish('amq.topic', 'test1.a', data);
       });
@@ -44,7 +47,10 @@ describe('amqper', function () {
         client.route('test2.:arg', {queue: 'this_is_queue_name_2'}, function (message) {
           console.log(message.payload);
           t.deepEqual(message.payload, data);
-          client.close(done);
+          client.close(function () {
+            t.lengthOf(client.svcs_container.routes, 0);
+            done();
+          });
         });
         client.publish('amq.topic', 'test2.a', data);
       });
