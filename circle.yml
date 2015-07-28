@@ -3,8 +3,6 @@ machine:
     Asia/Shanghai
   node:
     version: v0.12.7
-  services:
-    - rabbitmq
 
 test:
   pre:
