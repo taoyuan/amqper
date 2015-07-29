@@ -4,10 +4,6 @@ machine:
   node:
     version: v0.12.7
 
-test:
-  pre:
-    - npm run test
-
 general:
   artifacts:
     - "reports"
