@@ -4,6 +4,12 @@
 var t = require('chai').assert;
 var amqper = require('../');
 
+function delayCloseClient(client, done) {
+  setTimeout(function () {
+    client.close(done);
+  }, 100);
+}
+
 describe('amqper', function () {
 
   describe('connect', function () {
@@ -27,15 +33,13 @@ describe('amqper', function () {
         client.route('test1.:arg', {queue: 'this_is_queue_name_1'}, function (message) {
           console.log(message.payload);
           t.deepEqual(message.payload, data);
-          client.close(function () {
-            t.lengthOf(client.svcs_container.routes, 0);
-            done();
-          });
-        });
-        setTimeout(function () {
+          delayCloseClient(client, done);
+        }).then(function () {
           client.publish('amq.topic', 'test1.a', data);
-        }, 500);
+        });
       });
+
+
     });
 
     it('should publish and received in route with msgpack format', function (done) {
@@ -49,14 +53,10 @@ describe('amqper', function () {
         client.route('test2.:arg', {queue: 'this_is_queue_name_2'}, function (message) {
           console.log(message.payload);
           t.deepEqual(message.payload, data);
-          client.close(function () {
-            t.lengthOf(client.svcs_container.routes, 0);
-            done();
-          });
-        });
-        setTimeout(function () {
+          delayCloseClient(client, done);
+        }).then(function () {
           client.publish('amq.topic', 'test2.a', data);
-        }, 500);
+        });
       });
     });
   });
