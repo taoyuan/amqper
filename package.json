@@ -1,6 +1,6 @@
 {
   "name": "amqper",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A simple and elegant AMQP client for node based on amqplib.",
   "homepage": "https://github.com/taoyuan/amqper",
   "repository": "taoyuan/amqper",
