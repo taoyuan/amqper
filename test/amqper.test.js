@@ -11,6 +11,7 @@ function delayCloseClient(client, done) {
 }
 
 describe('amqper', function () {
+  this.timeout(8000);
 
   describe('connect', function () {
     it('should connect to rabbit server', function (done) {
