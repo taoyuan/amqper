@@ -5,17 +5,48 @@
 
 > A simple and elegant AMQP client for node based on amqplib.
 
-
 ## Install
 
 ```sh
 $ npm install --save amqper
 ```
 
-
 ## Usage
 
-__Coming Soon__
+### round-robin
+
+Run multiple consumer.js for round-robin shared.
+
+__consumer.js__
+
+```js
+var amqper = require('amqper');
+
+var client = amqper.connect('amqp://guest:guest@localhost:5672');
+
+client.$promise.then(function () {
+  console.log('ready');
+  client.route('test.a', function (message) {
+    console.log(message.payload);
+  });
+});
+
+```
+
+__producer.js__
+
+```js
+var amqper = require('amqper');
+
+var client = amqper.connect('amqp://guest:guest@localhost:5672');
+
+client.$promise.then(function () {
+  for (var i = 0; i < 10; i++) {
+    client.publish('amq.topic', 'test.a', i);
+  }
+});
+
+```
 
 ## License
 
