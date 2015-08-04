@@ -31,7 +31,7 @@ describe('amqper', function () {
 
       var client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function () {
-        client.route('test1.:arg', {queue: 'this_is_queue_name_1'}, function (message) {
+        client.route('test1.:arg', {queue: 'this_is_queue_name_1'}, function (err, message) {
           t.deepEqual(message.payload, data);
           delayCloseClient(client, done);
         }).then(function () {
@@ -50,7 +50,7 @@ describe('amqper', function () {
       var client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function () {
         client.format('msgpack');
-        client.route('test2.:arg', {queue: 'this_is_queue_name_2'}, function (message) {
+        client.route('test2.:arg', {queue: 'this_is_queue_name_2'}, function (err, message) {
           t.deepEqual(message.payload, data);
           delayCloseClient(client, done);
         }).then(function () {
