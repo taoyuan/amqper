@@ -1,8 +1,10 @@
 # amqper 
 
-[![NPM version][npm-image]][npm-url] 
-[![Build Status][circleci-image]][circleci-url] 
-[![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM Version](https://img.shields.io/npm/v/amqper.svg?style=flat)](https://www.npmjs.org/package/amqper)
+[![Build Status](http://img.shields.io/travis/taoyuan/amqper.svg?style=flat)](https://travis-ci.org/taoyuan/amqper)
+[![Coverage](https://coveralls.io/repos/taoyuan/amqper/badge.svg?branch=master)](https://coveralls.io/r/taoyuan/amqper)
+[![Quality](https://codeclimate.com/github/taoyuan/amqper/badges/gpa.svg)](https://codeclimate.com/github/taoyuan/amqper)
+[![Dependencies](https://img.shields.io/david/taoyuan/amqper.svg?style=flat)](https://david-dm.org/taoyuan/amqper)
 
 > A simple and elegant AMQP client for node based on amqplib.
 
@@ -52,11 +54,3 @@ client.$promise.then(function () {
 ## License
 
 MIT © [Tao Yuan]()
-
-
-[npm-image]: https://badge.fury.io/js/amqper.svg
-[npm-url]: https://npmjs.org/package/amqper
-[circleci-image]: https://circleci.com/gh/taoyuan/amqper.svg?style=shield
-[circleci-url]: https://circleci.com/gh/taoyuan/amqper
-[daviddm-image]: https://david-dm.org/taoyuan/amqper.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/taoyuan/amqper

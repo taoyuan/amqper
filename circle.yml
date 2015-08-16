@@ -1,9 +1,0 @@
-machine:
-  timezone:
-    Asia/Shanghai
-  node:
-    version: v0.12.7
-
-general:
-  artifacts:
-    - "reports"
