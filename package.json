@@ -15,26 +15,26 @@
     "router"
   ],
   "dependencies": {
-    "amqplib": "^0.4.0",
-    "bluebird": "^3.1.1",
-    "debug": "^2.2.0",
+    "amqplib": "^0.5.1",
+    "bluebird": "^3.5.0",
+    "debug": "^2.6.6",
     "depd": "^1.1.0",
     "houkou": "^0.2.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.4",
     "msgpack": "^1.0.2"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
-    "gulp": "^3.9.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.10.3",
-    "gulp-jshint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-nsp": "^2.2.1",
-    "gulp-plumber": "^1.0.1",
-    "jshint-stylish": "^2.1.0",
-    "mocha": "^2.3.4",
-    "uuid": "^2.0.1"
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-exclude-gitignore": "^1.1.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-mocha": "^4.3.1",
+    "gulp-nsp": "^2.4.2",
+    "gulp-plumber": "^1.1.0",
+    "jshint-stylish": "^2.2.1",
+    "mocha": "^3.3.0",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "test": "gulp"
