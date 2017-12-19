@@ -15,29 +15,30 @@
     "router"
   ],
   "dependencies": {
-    "amqplib": "^0.5.1",
-    "bluebird": "^3.5.0",
-    "debug": "^2.6.6",
-    "depd": "^1.1.0",
+    "amqplib": "^0.5.2",
+    "bluebird": "^3.5.1",
+    "debug": "^3.1.0",
+    "depd": "^1.1.1",
     "houkou": "^0.2.2",
     "lodash": "^4.17.4",
     "msgpack": "^1.0.2"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "@types/chai": "^4.0.10",
+    "chai": "^4.1.2",
     "gulp": "^3.9.1",
-    "gulp-exclude-gitignore": "^1.1.1",
-    "gulp-istanbul": "^1.1.1",
+    "gulp-exclude-gitignore": "^1.2.0",
+    "gulp-istanbul": "^1.1.2",
     "gulp-jshint": "^2.0.4",
     "gulp-mocha": "^4.3.1",
     "gulp-nsp": "^2.4.2",
     "gulp-plumber": "^1.1.0",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^3.3.0",
-    "uuid": "^3.0.1"
+    "mocha": "^4.0.1",
+    "uuid": "^3.1.0"
   },
   "scripts": {
-    "test": "gulp"
+    "test": "mocha test/**.test.js"
   },
   "license": "MIT"
 }

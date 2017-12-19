@@ -1,7 +1,7 @@
 'use strict';
 
-var t = require('chai').assert;
-var amqper = require('../');
+const assert = require('chai').assert;
+const amqper = require('..');
 
 function randomQueue() {
   return require('uuid').v4();
@@ -18,9 +18,9 @@ describe('amqper', function () {
 
   describe('connect', function () {
     it('should connect to rabbit server', function (done) {
-      var client = amqper.connect('amqp://guest:guest@localhost:5672');
+      const client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function (conn) {
-        t.ok(conn);
+        assert.ok(conn);
         client.close(done);
       });
     });
@@ -28,14 +28,14 @@ describe('amqper', function () {
 
   describe('pubsub', function () {
     it('should publish and received in route', function (done) {
-      var data = {
+      const data = {
         foo: 'bar1'
       };
 
-      var client = amqper.connect('amqp://guest:guest@localhost:5672');
+      const client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function () {
         client.route('test1.:arg', {queue: randomQueue()}, function (message) {
-          t.deepEqual(message.payload, data);
+          assert.deepEqual(message.payload, data);
           delayCloseClient(client, done);
         }).then(function () {
           client.publish('amq.topic', 'test1.a', data);
@@ -46,15 +46,15 @@ describe('amqper', function () {
     });
 
     it('should publish and received in route with msgpack format', function (done) {
-      var data = {
+      const data = {
         hello: 'world'
       };
 
-      var client = amqper.connect('amqp://guest:guest@localhost:5672');
+      const client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function () {
         client.format('msgpack');
         client.route('test2.:arg', {queue: randomQueue()}, function (message) {
-          t.deepEqual(message.payload, data);
+          assert.deepEqual(message.payload, data);
           delayCloseClient(client, done);
         }).then(function () {
           client.publish('amq.topic', 'test2.a', data);
@@ -63,11 +63,11 @@ describe('amqper', function () {
     });
 
     it('should handle the error in handler', function (done) {
-      var data = {
+      const data = {
         hello: 'world'
       };
 
-      var client = amqper.connect('amqp://guest:guest@localhost:5672');
+      const client = amqper.connect('amqp://guest:guest@localhost:5672');
       client.$promise.then(function () {
         client.route('test2.:arg', {queue: randomQueue()}, function () {
           throw new Error('boom');
@@ -76,7 +76,7 @@ describe('amqper', function () {
         });
       });
       client.on('error', function (err) {
-        t.equal(err.message, 'boom');
+        assert.equal(err.message, 'boom');
         delayCloseClient(client, done);
       });
     });

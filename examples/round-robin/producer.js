@@ -1,9 +1,21 @@
 "use strict";
 
-var amqper = require('../../');
+const PromiseA = require('bluebird');
+const amqper = require('../..');
 
-var client = amqper.connect('amqp://guest:guest@localhost:5672');
+const client = amqper.connect('amqp://guest:guest@localhost:5672');
 
-for (var i = 0; i < 10; i++) {
-  client.publish('amq.topic', 'test.a', i);
+function publish(i) {
+  client.publish('amq.topic', 'test.a', i).then(() => {
+    console.log('published ' + i);
+  });
 }
+
+let i = 0;
+
+(async () => {
+  while (true) {
+    await PromiseA.delay(1000);
+    publish(i++);
+  }
+})();
