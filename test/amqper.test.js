@@ -17,11 +17,15 @@ describe('amqper', function () {
   this.timeout(10000);
 
   describe('connect', function () {
-    it('should connect to rabbit server', function (done) {
+    it('should connect to rabbit server', function () {
       const client = amqper.connect('amqp://guest:guest@localhost:5672');
+      let asserted = false;
       client.$promise.then(function (conn) {
         assert.ok(conn);
-        client.close(done);
+        asserted = true;
+      });
+      return client.close().then(() => {
+        assert.ok(asserted);
       });
     });
   });
